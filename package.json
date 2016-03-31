@@ -1,0 +1,49 @@
+{
+  "name": "label-map",
+  "version": "0.0.1",
+  "description": "Simple application for work to label map",
+  "main": "bin/server.js",
+  "engines": {
+    "node": ">=4.2.0",
+    "npm": "^3.0.0"
+  },
+  "scripts": {
+    "clean": "",
+    "compile": "",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "start": "nodemon bin/server.js",
+    "dev": "",
+    "dev:nw": "",
+    "dev:no-debug": "",
+    "test": "npm run test",
+    "test:dev": "npm run test -- --watch",
+    "deploy": "",
+    "flow:check": "babel-node bin/flow-check",
+    "codecov": ""
+  },
+  "betterScripts": {
+    "compile": {},
+    "dev": {},
+    "deploy": {},
+    "start": {},
+    "test": {}
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/batazor/LabelMap.git"
+  },
+  "keywords": [
+    "redux",
+    "react",
+    "node.js",
+    "websocker",
+    "es6"
+  ],
+  "author": "batazor <batazor111@gmail.com (http://batazor.ru)>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/batazor/LabelMap/issues"
+  },
+  "homepage": "https://github.com/batazor/LabelMap#readme"
+}
