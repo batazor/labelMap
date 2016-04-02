@@ -42,5 +42,5 @@ ReactDOM.render(
       <devTools />
     </div>
   </Provider>,
-  document.getElementById('mount')
+  document.getElementById('app')
 )
