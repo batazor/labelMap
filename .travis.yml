@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-  - "5.9"
+  - "5.10"
 
 cache:
   directories:
@@ -9,14 +9,3 @@ cache:
 
 install:
   - npm install
-
-script:
-  - npm run lint
-  - npm run flow:check
-  - npm run test
-  - NODE_ENV=development npm run deploy
-  - NODE_ENV=staging npm run deploy
-  - NODE_ENV=production npm run deploy
-
-after_success:
-  - npm run codecov
