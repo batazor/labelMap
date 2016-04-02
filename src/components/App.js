@@ -1,4 +1,4 @@
-import Reaact from 'react'
+import React from 'react'
 import { Link, browserHistory } from 'react-router'
 
 export default function App({ children }) {
@@ -16,7 +16,7 @@ export default function App({ children }) {
       <div>
         <button onClick={() => browserHistory.push('/foo')}>Go to /foo</button>
       </div>
-      <div style=({ marginTop: '1.5em' })>{ children }</div>
+      <div style={{ marginTop: '1.5em' }}>{children}</div>
     </div>
   )
 }
