@@ -1,10 +1,11 @@
 const path = require('path')
 const webpack = require('webpack')
 
-module.exports = {
+const config = {
   context: __dirname,
   entry: [
-    'webpack-hot-middleware/client',
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/dev-server',
     './src/app.js'
   ],
   output: {
@@ -13,17 +14,19 @@ module.exports = {
     filename: 'bundle.js'
   },
   devtool: '#source-map',
-  module: {
-    loaders: [{
-      test: /\.js$/,
-      loader: 'babel',
-      exclude: /node_modules/,
-      include: __dirname
-    }]
-  },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
   ],
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        loader: [ 'react-hot', 'babel' ],
+        exclude: /node_modules/,
+        include: __dirname
+      }
+    ]
+  }
 }
+
+export default config;
