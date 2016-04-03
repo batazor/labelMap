@@ -40,7 +40,7 @@ ReactDOM.render(
           <Route path="bar" component={Bar} />
         </Route>
       </Router>
-      <devTools />
+      <DevTools />
     </div>
   </Provider>,
   document.getElementById('app')

@@ -8,7 +8,7 @@
     "npm": "^3.0.0"
   },
   "scripts": {
-    "start:dev": "webpack-dev-server --history-api-fallback --no-info --open"
+    "start:dev": "webpack-dev-server --history-api-fallback --open"
   },
   "repository": {
     "type": "git",
