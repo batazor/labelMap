@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 
-const config = {
+module.exports = {
   context: __dirname,
   entry: [
     'webpack-dev-server/client?http://localhost:8080',
@@ -18,15 +18,18 @@ const config = {
     new webpack.HotModuleReplacementPlugin(),
   ],
   module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loader: [ 'react-hot', 'babel' ],
-        exclude: /node_modules/,
-        include: __dirname
-      }
-    ]
-  }
-}
-
-export default config;
+    loaders: [{
+      test: /\.js$/,
+      loader: 'babel',
+      exclude: /node_modules/,
+      include: __dirname
+    }]
+  },  
+  devServer: {
+    hot: true,
+    colors: true,
+    inline: true,
+    historyApiFallback: true,
+    contentBase: __dirname
+  },
+};
