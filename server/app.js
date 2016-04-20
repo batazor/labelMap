@@ -9,7 +9,7 @@ let app = express()
 app.set('view', path.resolve(__dirname, './view'))
 app.set('view engine', 'jade')
 
-app.use(express.static(path.resolve(__dirname, '../public')))
+app.use(express.static(path.resolve(__dirname, '../bundle')))
 
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../public/template.html'));
