@@ -4,8 +4,8 @@ const webpack = require('webpack')
 module.exports = {
   context: __dirname,
   entry: [
-    'webpack-dev-server/client?http://0.0.0.0:3000',
-    'webpack/hot/only-dev-server',
+    // 'webpack-dev-server/client?http://0.0.0.0:3000',
+    // 'webpack/hot/only-dev-server',
     './src/app.js'
   ],
   output: {
