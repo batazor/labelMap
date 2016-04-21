@@ -57,8 +57,6 @@ app.use(function (req, res) {
         </Provider>
       )
 
-      console.log(content)
-
       res.send('<!doctype html>\n' + renderToString(<HTML content={content} store={store}/>))
     }
   })
