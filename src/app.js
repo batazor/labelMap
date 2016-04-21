@@ -13,14 +13,14 @@ const store = configureStore(browserHistory, window.__initialState__)
 const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history} routes={routes} />
+  <Provider store={ store }>
+    <Router history={ history } routes={ routes } />
   </Provider>,
   document.getElementById('app')
 )
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={ store }>
     <DevTools/>
   </Provider>,
   document.getElementById('devtools')
