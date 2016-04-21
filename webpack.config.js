@@ -4,13 +4,11 @@ const webpack = require('webpack')
 module.exports = {
   context: __dirname,
   entry: [
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/dev-server',
     './src/app.js'
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
+    publicPath: '/__build__/',
     filename: 'bundle.js'
   },
   devtool: '#source-map',
@@ -24,7 +22,7 @@ module.exports = {
       exclude: /node_modules/,
       include: __dirname
     }]
-  },  
+  },
   devServer: {
     hot: true,
     colors: true,
