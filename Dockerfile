@@ -2,6 +2,38 @@ FROM       richarvey/nginx-php-fpm
 
 MAINTAINER "Login Victor" <batazor111@gmail.com>
 
+RUN apt-get update -y && \
+    apt-get install -y curl telnet \
+      libapache2-mod-php5
+
+# ENV
+ENV APP_ENV=local
+ENV APP_DEBUG=true
+ENV APP_KEY=base64:Dg2i73yA98rIT3drKGoJE8EVLYxZRKQiLCy2Y+CsJhU=
+ENV APP_URL=http://localhost
+
+ENV DB_CONNECTION=pgsql
+ENV DB_HOST=postgres
+ENV DB_PORT=5432
+ENV DB_DATABASE=labelMap
+ENV DB_USERNAME=postgres
+ENV DB_PASSWORD=mysecretpassword
+
+ENV CACHE_DRIVER=file
+ENV SESSION_DRIVER=file
+ENV QUEUE_DRIVER=sync
+
+ENV REDIS_HOST=127.0.0.1
+ENV REDIS_PASSWORD=null
+ENV REDIS_PORT=6379
+
+ENV MAIL_DRIVER=smtp
+ENV MAIL_HOST=mailtrap.io
+ENV MAIL_PORT=2525
+ENV MAIL_USERNAME=null
+ENV MAIL_PASSWORD=null
+ENV MAIL_ENCRYPTION=null
+
 # ADD file project to folder 'src'
 WORKDIR     /var/www/html/
 RUN         rm -rf *
