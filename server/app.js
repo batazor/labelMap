@@ -25,7 +25,7 @@ app.listen(configApp.APP_PORT, (err, result) => {
   console.log(` ✔ Server API listening on http://localhost:${ configApp.APP_PORT }, Ctrl+C to stop`);
 });
 
-if (configApp.APP_ENV === 'develop') {
+if (configApp.APP_ENV) {
 
   new WebpackDevServer(webpack(webpackConfig), {
     publicPath: webpackConfig.output.publicPath,
