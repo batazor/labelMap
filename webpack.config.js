@@ -31,11 +31,17 @@ module.exports = {
     }),
   ],
   module: {
-    loaders: [{
-      test: /\.js$/,
-      loaders: ['react-hot', 'babel'],
-      exclude: /node_modules/,
-      include: __dirname
-    }]
+    loaders: [
+      {
+        test: /\.js$/,
+        loaders: ['react-hot', 'babel'],
+        exclude: /node_modules/,
+        include: __dirname
+      },
+      {
+        test: /\.css$/,
+        loaders: "style-loader!css-loader?root=."
+      }
+    ]
   }
 };

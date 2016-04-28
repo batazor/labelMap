@@ -15,6 +15,8 @@ injectTapEventPlugin()
 import * as reducers from './reducers'
 import { App, Home, Foo, Bar } from './components'
 
+import './style/flexboxgrid.css'
+
 const reducer = combineReducers({
   ...reducers,
   routing: routerReducer
