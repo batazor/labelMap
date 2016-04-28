@@ -2,18 +2,17 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
-  context: __dirname,
   entry: [
-    // 'webpack-dev-server/client?http://0.0.0.0:3000',
-    // 'webpack/hot/only-dev-server',
+    'webpack-dev-server/client?http://0.0.0.0:4100',
+    'webpack/hot/only-dev-server',
     './src/app.js'
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/__build__/',
+    publicPath: '/public/',
     filename: 'bundle.js'
   },
-  devtool: '#source-map',
+  devtool: 'source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],
@@ -24,12 +23,5 @@ module.exports = {
       exclude: /node_modules/,
       include: __dirname
     }]
-  },
-  devServer: {
-    hot: false,
-    colors: true,
-    inline: true,
-    historyApiFallback: true,
-    contentBase: __dirname
-  },
+  }
 };

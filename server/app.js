@@ -2,68 +2,40 @@
 
 import path from 'path'
 import express from 'express'
-import serialize from 'serialize-javascript'
 
 import webpack from 'webpack'
-import webpackDevMiddleware from 'webpack-dev-middleware'
+import WebpackDevServer from 'webpack-dev-server'
 import webpackConfig from '../webpack.config'
-
-import React from 'react'
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
-import { renderToString } from 'react-dom/server'
-import { Provider } from 'react-redux'
-import { Route, IndexRoute, Link, createMemoryHistory, match, RouterContext } from 'react-router'
-import { routerReducer, routerMiddleware, syncHistoryWithStore } from 'react-router-redux'
-
-import { configureStore, DevTools } from '../src/store'
-import routes from '../src/routes'
 
 import { app as configApp } from '../config'
 
 let app = express()
 
-app.use(webpackDevMiddleware(webpack(webpackConfig), {
-  publicPath: '/__build__/',
-  stats: {
-    colors: true
-  }
-}))
+app.use(express.static(path.resolve(__dirname, '../public')))
 
-const HTML = ({ content, store }) => (
-  <html>
-    <body>
-      <div id="app" dangerouslySetInnerHTML={{ __html: content }}/>
-      <div id="devtools"/>
-      <script dangerouslySetInnerHTML={{ __html: `window.__initialState__=${serialize(store.getState())};` }}/>
-      <script src="/__build__/bundle.js"/>
-    </body>
-  </html>
-)
-
-app.use(function (req, res) {
-  const memoryHistory = createMemoryHistory(req.url)
-  const store = configureStore(memoryHistory)
-  const history = syncHistoryWithStore(memoryHistory, store)
-
-  match({ history, routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    if (error) {
-      res.status(500).send(error.message)
-    } else if (redirectLocation) {
-      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
-    } else if (renderProps) {
-      const content = renderToString(
-        <Provider store={store}>
-          <RouterContext {...renderProps}/>
-        </Provider>
-      )
-
-      res.send('<!doctype html>\n' + renderToString(<HTML content={content} store={store}/>))
-    }
-  })
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../public/template.html'));
 })
 
-app.use(express.static(path.resolve(__dirname, '../dist')))
+app.listen(configApp.APP_PORT, (err, result) => {
+  if (err) {
+    return console.error(err);
+  }
 
-app.listen(configApp.APP_PORT, () => {
-  console.log(`Server listening on http://localhost:${ configApp.APP_PORT }, Ctrl+C to stop`);
+  console.log(` ✔ Server API listening on http://localhost:${ configApp.APP_PORT }, Ctrl+C to stop`);
 });
+
+if (configApp.APP_ENV === 'develop') {
+
+  new WebpackDevServer(webpack(webpackConfig), {
+    publicPath: webpackConfig.output.publicPath,
+    hot: true,
+    historyApiFallback: true
+  }).listen(configApp.APP_DEV, 'localhost', function (err, result) {
+    if (err) {
+      return console.error(err);
+    }
+
+    console.log(` ✔ WebpackDevServer listening on http://localhost:${ configApp.APP_DEV }, Ctrl+C to stop`);
+  });
+}
