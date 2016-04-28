@@ -22,7 +22,7 @@ module.exports = {
     publicPath: '/public/',
     filename: 'bundle.js'
   },
-  devtool: 'source-map',
+  devtool: configApp.APP_ENV ? 'eval' : 'source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
