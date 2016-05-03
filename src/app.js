@@ -1,10 +1,6 @@
-import { createDevTools } from 'redux-devtools'
-import LogMonitor from 'redux-devtools-log-monitor'
-import DockMonitor from 'redux-devtools-dock-monitor'
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers } from 'redux'
+
 import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
@@ -12,46 +8,25 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
-import * as reducers from './reducers'
-import { App, Home, Foo, Bar } from './components'
+import { configureStore, DevTools } from './store'
+import routes from './routes'
 
 // import './style/flexboxgrid.css'
 import './style/base.styl'
 
-const reducer = combineReducers({
-  ...reducers,
-  routing: routerReducer
-})
-
-const DevTools = createDevTools(
-  <DockMonitor
-    toggleVisibilityKey="ctrl-h"
-    changePositionKey="ctrl-q">
-
-    <LogMonitor theme="tomorrow" preserveScrollTop={false} />
-
-  </DockMonitor>
-)
-
-const store = createStore(
-  reducer,
-  DevTools.instrument()
-)
-
+const store = configureStore(browserHistory, window.__initialState__)
 const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render(
-  <Provider store={store}>
-    <div>
-      <Router history={history}>
-        <Route path="/" component={App}>
-          <IndexRoute component={Home} />
-          <Route path="foo" component={Foo} />
-          <Route path="bar" component={Bar} />
-        </Route>
-      </Router>
-      <DevTools />
-    </div>
+  <Provider store={ store } >
+    <Router history={ history } routes={ routes } />
   </Provider>,
   document.getElementById('app')
+)
+
+ReactDOM.render(
+  <Provider store={ store }>
+    <DevTools/>
+  </Provider>,
+  document.getElementById('devtools')
 )
