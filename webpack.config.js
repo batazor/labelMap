@@ -5,7 +5,7 @@ const HtmlPlugin = require('html-webpack-plugin')
 
 const configApp = {
   APP_ENV: process.env.APP_ENV === 'develop',
-  APP_PORT: process.env.APP_PORT ? parseInt(process.env.APP_PORT) : 4000,
+  APP_PORT_DEV: process.env.APP_PORT_DEV ? parseInt(process.env.APP_PORT_DEV) : 4100,
 }
 
 const sassLoaders = [
@@ -22,12 +22,13 @@ const stylusLoaders = [
 ]
 
 const devFlagPlugin = new webpack.DefinePlugin({
-  __DEV__: JSON.stringify(JSON.parse(process.env.APP_DEBUG || 'false'))
+  __APP_ENV__: configApp.APP_ENV,
+  __APP_PORT__: configApp.APP_PORT_DEV
 });
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://0.0.0.0:' + configApp.APP_PORT,
+    'webpack-dev-server/client?http://0.0.0.0:' + configApp.APP_PORT_DEV,
     'webpack/hot/only-dev-server',
     './src/app.js'
   ],
@@ -63,7 +64,7 @@ module.exports = {
     }),
     new ExtractTextPlugin("styles.css"),
     new HtmlPlugin({
-      title: 'Test APP',
+      title: 'Label map',
       filename: 'index.html',
       template: path.resolve(__dirname, 'public/template.html'),
     })

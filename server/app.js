@@ -72,12 +72,21 @@ app.listen(configApp.APP_PORT, (err, result) => {
 
 if (configApp.APP_ENV) {
 
-  new WebpackDevServer(webpack(webpackConfig))
-    .listen(configApp.APP_DEV, 'localhost', function (err, result) {
-      if (err) {
-        return console.error(err);
-      }
+  new WebpackDevServer(webpack(webpackConfig), {
+    publicPath: webpackConfig.output.publicPath,
+    historyApiFallback: true,
+    hot: true,
+    quiet: false,
+    noInfo: true,
+    stats: {
+      colors: true
+    }
+  }).listen(configApp.APP_PORT_DEV, 'localhost', function (err, result) {
+    if (err) {
+      return console.error(err);
+    }
 
-      console.log(` ✔ WebpackDevServer listening on http://localhost:${ configApp.APP_DEV }, Ctrl+C to stop`);
-    });
+    console.log(` ✔ WebpackDevServer listening on http://localhost:${ configApp.APP_PORT_DEV }`);
+    console.log('Bundling project, please wait...');
+  });
 }

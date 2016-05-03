@@ -12,7 +12,6 @@ import { configureStore, DevTools } from './store'
 import routes from './routes'
 
 // import './style/flexboxgrid.css'
-import './style/base.styl'
 
 const store = configureStore(browserHistory, window.__initialState__)
 const history = syncHistoryWithStore(browserHistory, store)
