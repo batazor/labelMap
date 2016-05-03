@@ -27,15 +27,12 @@ app.listen(configApp.APP_PORT, (err, result) => {
 
 if (configApp.APP_ENV) {
 
-  new WebpackDevServer(webpack(webpackConfig), {
-    publicPath: webpackConfig.output.publicPath,
-    hot: true,
-    historyApiFallback: true
-  }).listen(configApp.APP_DEV, 'localhost', function (err, result) {
-    if (err) {
-      return console.error(err);
-    }
+  new WebpackDevServer(webpack(webpackConfig))
+    .listen(configApp.APP_DEV, 'localhost', function (err, result) {
+      if (err) {
+        return console.error(err);
+      }
 
-    console.log(` ✔ WebpackDevServer listening on http://localhost:${ configApp.APP_DEV }, Ctrl+C to stop`);
-  });
+      console.log(` ✔ WebpackDevServer listening on http://localhost:${ configApp.APP_DEV }, Ctrl+C to stop`);
+    });
 }

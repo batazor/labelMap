@@ -1,11 +1,26 @@
 const path = require('path')
 const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlPlugin = require('html-webpack-plugin')
 
 const configApp = {
   APP_ENV: process.env.APP_ENV === 'develop',
   APP_PORT: process.env.APP_PORT ? parseInt(process.env.APP_PORT) : 4000,
   APP_DEV: process.env.APP_DEV ? parseInt(process.env.APP_DEV) : 4100,
 }
+
+const sassLoaders = [
+  'css-loader',
+  'postcss-loader',
+  'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve(__dirname, './src')
+]
+
+const stylusLoaders = [
+  'css-loader',
+  'autoprefixer-loader?browsers=last 5 version',
+  'postcss-loader',
+  'stylus-loader?includePaths[]=' + path.resolve(__dirname, './src')
+]
 
 const devFlagPlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.APP_DEBUG || 'false'))
@@ -18,18 +33,11 @@ module.exports = {
     './src/app.js'
   ],
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/public/',
+    path: path.resolve(__dirname, 'public'),
+    publicPath: '/',
     filename: 'bundle.js'
   },
   devtool: configApp.APP_ENV ? 'eval' : 'source-map',
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({
-      __DEV__: JSON.stringify(JSON.parse(configApp.APP_ENV))
-    }),
-  ],
   module: {
     loaders: [
       {
@@ -39,9 +47,26 @@ module.exports = {
         include: __dirname
       },
       {
-        test: /\.css$/,
-        loaders: "style-loader!css-loader?root=."
+        test: /\.sass$/,
+        loader: ExtractTextPlugin.extract('style-loader', sassLoaders.join('!'))
+      },
+      {
+        test: /\.styl$/,
+        loader: ExtractTextPlugin.extract('style-loader', stylusLoaders.join('!'))
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      __DEV__: JSON.stringify(JSON.parse(configApp.APP_ENV))
+    }),
+    new ExtractTextPlugin("styles.css"),
+    new HtmlPlugin({
+      title: 'Test APP',
+      filename: 'index.html',
+      template: path.resolve(__dirname, 'public/template.html'),
+    })
+  ],
 };
