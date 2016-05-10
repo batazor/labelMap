@@ -16,9 +16,9 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { configureStore } from '../src/store'
 import routes from '../src/routes'
 
-import { app as configApp } from '../config'
+import { app as configApp } from './config'
 
-let app = express()
+const app = express()
 
 app.use(express.static(path.resolve(__dirname, '../public')))
 
@@ -62,15 +62,15 @@ app.use(function (req, res) {
   })
 })
 
-app.listen(configApp.APP_PORT, (err, result) => {
+app.listen(configApp.PORT, (err, result) => {
   if (err) {
     return console.error(err);
   }
 
-  console.log(` ✔ Server API listening on http://localhost:${ configApp.APP_PORT }, Ctrl+C to stop`);
+  console.log(` ✔ Server API listening on http://localhost:${ configApp.PORT }, Ctrl+C to stop`);
 })
 
-if (configApp.APP_ENV) {
+if (configApp.ENV) {
 
   new WebpackDevServer(webpack(webpackConfig), {
     publicPath: webpackConfig.output.publicPath,
@@ -81,12 +81,12 @@ if (configApp.APP_ENV) {
     stats: {
       colors: true
     }
-  }).listen(configApp.APP_PORT_DEV, 'localhost', function (err, result) {
+  }).listen(configApp.PORT_DEV, 'localhost', function (err, result) {
     if (err) {
       return console.error(err);
     }
 
-    console.log(` ✔ WebpackDevServer listening on http://localhost:${ configApp.APP_PORT_DEV }`);
+    console.log(` ✔ WebpackDevServer listening on http://localhost:${ configApp.PORT_DEV }`);
     console.log('\nBundling project, please wait...');
   });
 }

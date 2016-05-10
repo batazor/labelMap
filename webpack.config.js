@@ -4,8 +4,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlPlugin = require('html-webpack-plugin')
 
 const configApp = {
-  APP_ENV: process.env.APP_ENV === 'develop',
-  APP_PORT_DEV: process.env.APP_PORT_DEV ? parseInt(process.env.APP_PORT_DEV) : 4100,
+  ENV: process.env.ENV === 'develop',
+  PORT_DEV: process.env.PORT_DEV ? parseInt(process.env.PORT_DEV) : 4100,
 }
 
 const sassLoaders = [
@@ -22,13 +22,13 @@ const stylusLoaders = [
 ]
 
 const devFlagPlugin = new webpack.DefinePlugin({
-  __APP_ENV__: configApp.APP_ENV,
-  __APP_PORT__: configApp.APP_PORT_DEV
+  __ENV__: configApp.ENV,
+  __PORT__: configApp.PORT_DEV
 });
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://0.0.0.0:' + configApp.APP_PORT_DEV,
+    'webpack-dev-server/client?http://0.0.0.0:' + configApp.PORT_DEV,
     'webpack/hot/only-dev-server',
     './src/app.js'
   ],
@@ -37,7 +37,7 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js'
   },
-  devtool: configApp.APP_ENV ? 'eval' : 'source-map',
+  devtool: configApp.ENV ? 'eval' : 'source-map',
   module: {
     loaders: [
       {
@@ -60,7 +60,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
-      __DEV__: JSON.stringify(JSON.parse(configApp.APP_ENV))
+      __DEV__: JSON.stringify(JSON.parse(configApp.ENV))
     }),
     new ExtractTextPlugin("styles.css"),
     new HtmlPlugin({
