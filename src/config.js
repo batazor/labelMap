@@ -1,10 +1,9 @@
 export const app = {
-  ENV: process.env.APP_ENV || 'develop',
-  DEBUG: process.env.APP_DEBUG == 'true',
+  ENV: process.env.ENV || 'develop',
+  DEBUG: process.env.DEBUG == 'true',
 
-  PORT: process.env.APP_PORT ? parseInt(process.env.APP_PORT) : 4000,
-  PORT_DEV: process.env.APP_PORT_DEV ? parseInt(process.env.APP_PORT_DEV) : 4100,
-  HOSTNAME: process.env.WEBSITE_HOSTNAME || `localhost:${port}`,
+  PORT: process.env.PORT ? parseInt(process.env.PORT) : 4000,
+  PORT_DEV: process.env.PORT_DEV ? parseInt(process.env.PORT_DEV) : 4100,
 }
 
 export const analytics = {

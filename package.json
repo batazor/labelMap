@@ -8,7 +8,7 @@
     "npm": "^3.0.0"
   },
   "scripts": {
-    "start": "NODE_ENV=development babel-node server/app",
+    "start": "NODE_ENV=development babel-node src/server",
     "build": "NODE_ENV=production babel-node server/app"
   },
   "repository": {
