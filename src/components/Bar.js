@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 
 let divStyle = {
-  background: 'green'
+  background: 'green',
+  padding: '15px',
+  border: '5px solid red'
 };
 
 export default class Bar extends Component {
