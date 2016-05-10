@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 
-import '../style/base.styl'
-
 let divStyle = {
   background: 'green'
 };

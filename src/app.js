@@ -5,13 +5,14 @@ import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
+// import './style/flexboxgrid.css'
+import './style/base.styl'
+
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
 
 import { configureStore, DevTools } from './store'
 import routes from './routes'
-
-// import './style/flexboxgrid.css'
 
 const store = configureStore(browserHistory, window.__initialState__)
 const history = syncHistoryWithStore(browserHistory, store)

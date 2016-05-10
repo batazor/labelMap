@@ -87,6 +87,6 @@ if (configApp.APP_ENV) {
     }
 
     console.log(` ✔ WebpackDevServer listening on http://localhost:${ configApp.APP_PORT_DEV }`);
-    console.log('Bundling project, please wait...');
+    console.log('\nBundling project, please wait...');
   });
 }
