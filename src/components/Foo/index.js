@@ -1,11 +1,25 @@
-import React, { Component } from 'react'
+// import React, { Component } from 'react'
+//
+// export default class Foo extends Component {
+//   render() {
+//     return (
+//       <div>And I am Foo!</div>
+//     );
+//   }
+// }
 
-import './base.styl'
+import styles from './ScopedSelectors.css';
 
-export default class Foo extends Component {
+import React, { Component } from 'react';
+
+export default class ScopedSelectors extends Component {
+
   render() {
     return (
-      <div>And I am Foo!</div>
+      <div className={ styles.root }>
+        <p className={ styles.text }>Scoped Selectors</p>
+      </div>
     );
   }
-}
+
+};

@@ -35,7 +35,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'public'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    libraryTarget: 'umd'
   },
   devtool: configApp.ENV ? 'eval' : 'source-map',
   module: {
@@ -47,22 +48,34 @@ module.exports = {
         include: __dirname
       },
       {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
+      },
+      {
         test: /\.sass$/,
         loader: ExtractTextPlugin.extract('style-loader', sassLoaders.join('!'))
       },
       {
         test: /\.styl$/,
         loader: ExtractTextPlugin.extract('style-loader', stylusLoaders.join('!'))
+      },
+      {
+        test: /\.svg$/,
+        loader: "url-loader?limit=10000&mimetype=image/svg+xml"
       }
     ]
   },
+  postcss: [
+    require('autoprefixer-core'),
+    require('postcss-color-rebeccapurple')
+  ],
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       __DEV__: JSON.stringify(JSON.parse(configApp.ENV))
     }),
-    new ExtractTextPlugin("styles.css"),
+    new ExtractTextPlugin("styles.css", { allChunks: true }),
     new HtmlPlugin({
       title: 'Label map',
       filename: 'index.html',
