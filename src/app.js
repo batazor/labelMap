@@ -6,7 +6,6 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 // import './style/flexboxgrid.css'
-import './style/base.styl'
 
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin()
