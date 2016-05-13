@@ -13,10 +13,9 @@ import { Provider } from 'react-redux'
 import { createMemoryHistory, match, RouterContext } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
-import { configureStore } from '../src/store'
-import routes from '../src/routes'
-
 import { app as configApp } from './config'
+import { configureStore } from './store'
+import routes from './routes'
 
 const app = express()
 

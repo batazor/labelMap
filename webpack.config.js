@@ -35,8 +35,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'public'),
     publicPath: '/',
-    filename: 'bundle.js',
-    libraryTarget: 'umd'
+    filename: 'bundle.js'
   },
   devtool: configApp.ENV ? 'eval' : 'source-map',
   module: {
@@ -44,8 +43,7 @@ module.exports = {
       {
         test: /\.js$/,
         loaders: ['react-hot', 'babel'],
-        exclude: /node_modules/,
-        include: __dirname
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
@@ -57,11 +55,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: [
-          'isomorphic-style-loader',
-          'css-loader?modules&localIdentName=[name]_[local]_[hash:base64:3]',
-          'postcss-loader'
-        ]
+        loader: 'style-loader!css-loader!autoprefixer-loader!sass-loader'
       },
       {
         test: /\.styl$/,
@@ -72,6 +66,9 @@ module.exports = {
         loader: "url-loader?limit=10000&mimetype=image/svg+xml"
       }
     ]
+  },
+  sassLoader: {
+    includePaths: [ path.resolve(__dirname, './src') ]
   },
   postcss: [
     require('autoprefixer-core'),
