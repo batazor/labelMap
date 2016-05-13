@@ -8,18 +8,32 @@
 //   }
 // }
 
-import styles from './ScopedSelectors.css';
+// import styles from './ScopedSelectors.css';
+//
+// import React, { Component } from 'react';
+//
+// export default class ScopedSelectors extends Component {
+//
+//   render() {
+//     return (
+//       <div className={ styles.root }>
+//         <p className={ styles.text }>Scoped Selectors</p>
+//       </div>
+//     );
+//   }
+//
+// };
 
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import s from './MyComponent.scss';
 
-export default class ScopedSelectors extends Component {
+function MyComponent(props, context) {
+  return (
+    <div className={s.root}>
+      <h1 className={s.title}>Hello, world!</h1>
+    </div>
+  );
+}
 
-  render() {
-    return (
-      <div className={ styles.root }>
-        <p className={ styles.text }>Scoped Selectors</p>
-      </div>
-    );
-  }
-
-};
+export default withStyles(s)(MyComponent);

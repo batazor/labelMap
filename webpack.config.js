@@ -56,6 +56,14 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style-loader', sassLoaders.join('!'))
       },
       {
+        test: /\.scss$/,
+        loaders: [
+          'isomorphic-style-loader',
+          'css-loader?modules&localIdentName=[name]_[local]_[hash:base64:3]',
+          'postcss-loader'
+        ]
+      },
+      {
         test: /\.styl$/,
         loader: ExtractTextPlugin.extract('style-loader', stylusLoaders.join('!'))
       },
