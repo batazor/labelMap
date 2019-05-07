@@ -72,7 +72,7 @@
     "redux-devtools-diff-monitor": "^5.0.4",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.8",
-    "redux-slider-monitor": "^1.0.5",
+    "redux-slider-monitor": "^1.0.7",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "stylus": "^0.54.5",
