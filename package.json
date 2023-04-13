@@ -5,7 +5,7 @@
   "main": "server/app.js",
   "engines": {
     "node": ">=v4.9.1",
-    "npm": "^6.14.15"
+    "npm": "^6.14.18"
   },
   "scripts": {
     "start": "NODE_ENV=development babel-node src/server",
