@@ -65,7 +65,7 @@
     "isomorphic-style-loader": "^5.3.2",
     "node-sass": "^7.0.3",
     "postcss-color-rebeccapurple": "^7.1.1",
-    "postcss-loader": "^7.3.0",
+    "postcss-loader": "^7.3.2",
     "react-hot-loader": "^4.13.1",
     "react-to-html-webpack-plugin": "^2.2.0",
     "redux-devtools": "^3.7.0",
